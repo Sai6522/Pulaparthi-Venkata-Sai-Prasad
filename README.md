@@ -100,11 +100,10 @@ The solution normalizes the data into 6 tables:
 ### Files Created
 
 1. `src/schema.sql` - Complete database schema with proper foreign keys
-2. `src/etl.py` - Full-featured ETL script with Pydantic validation
-3. `src/final_etl.py` - Working ETL script that successfully processes data
-4. `src/json_cleaner.py` - JSON data cleaning utility
-5. `data/cleaned_sample.json` - Sample cleaned data for demonstration
-6. `requirements.txt` - Python dependencies
+2. `src/etl.py` - Main ETL script that processes data and creates normalized tables
+3. `src/json_cleaner.py` - JSON data cleaning utility for malformed data
+4. `data/cleaned_sample.json` - Sample cleaned data for demonstration
+5. `requirements.txt` - Python dependencies
 
 ### Dependencies Justification
 
@@ -127,7 +126,7 @@ pip install -r requirements.txt
 
 3. Run ETL process:
 ```bash
-python src/final_etl.py
+python src/etl.py
 ```
 
 ### Data Processing
