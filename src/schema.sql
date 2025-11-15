@@ -1,17 +1,16 @@
--- Database schema for normalized property data
+-- Normalized database schema based on Field Config.xlsx
 
--- Main property table
 CREATE TABLE IF NOT EXISTS property (
     property_id INT AUTO_INCREMENT PRIMARY KEY,
     property_title VARCHAR(500),
     address VARCHAR(500),
+    market VARCHAR(100),
+    flood VARCHAR(50),
     street_address VARCHAR(300),
     city VARCHAR(100),
     state VARCHAR(10),
     zip VARCHAR(20),
-    market VARCHAR(100),
     property_type VARCHAR(50),
-    flood VARCHAR(50),
     highway VARCHAR(50),
     train VARCHAR(50),
     tax_rate DECIMAL(5,2),
@@ -34,11 +33,9 @@ CREATE TABLE IF NOT EXISTS property (
     latitude DECIMAL(10,8),
     longitude DECIMAL(11,8),
     subdivision VARCHAR(100),
-    school_average DECIMAL(4,2),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    school_average DECIMAL(4,2)
 );
 
--- Leads table
 CREATE TABLE IF NOT EXISTS leads (
     lead_id INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT,
@@ -51,16 +48,14 @@ CREATE TABLE IF NOT EXISTS leads (
     selling_reason VARCHAR(200),
     seller_retained_broker VARCHAR(200),
     final_reviewer VARCHAR(100),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (property_id) REFERENCES property(property_id)
 );
 
--- Valuation table
 CREATE TABLE IF NOT EXISTS valuation (
     valuation_id INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT,
-    list_price INT,
     previous_rent INT,
+    list_price INT,
     zestimate INT,
     arv INT,
     expected_rent INT,
@@ -68,21 +63,17 @@ CREATE TABLE IF NOT EXISTS valuation (
     low_fmr INT,
     high_fmr INT,
     redfin_value INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (property_id) REFERENCES property(property_id)
 );
 
--- HOA table
 CREATE TABLE IF NOT EXISTS hoa (
     hoa_id INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT,
-    hoa_amount INT,
+    hoa INT,
     hoa_flag VARCHAR(10),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (property_id) REFERENCES property(property_id)
 );
 
--- Rehab table
 CREATE TABLE IF NOT EXISTS rehab (
     rehab_id INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT,
@@ -99,15 +90,12 @@ CREATE TABLE IF NOT EXISTS rehab (
     windows_flag VARCHAR(10),
     landscaping_flag VARCHAR(10),
     trashout_flag VARCHAR(10),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (property_id) REFERENCES property(property_id)
 );
 
--- Taxes table
 CREATE TABLE IF NOT EXISTS taxes (
     tax_id INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT,
     taxes INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (property_id) REFERENCES property(property_id)
 );
