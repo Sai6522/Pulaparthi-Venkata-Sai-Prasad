@@ -82,3 +82,77 @@ For MySQL Docker image reference:
 ## Solutions and Instructions (Filed by Candidate)
 
 **Document your solution here:**
+
+### Solution Overview
+
+I have created a normalized database schema and ETL pipeline to process the property data from JSON to MySQL.
+
+### Database Schema
+
+The solution normalizes the data into 6 tables:
+- `property`: Main property information (title, address, market, type, sqft, bed/bath, etc.)
+- `leads`: Lead/status information (reviewed status, source, etc.)
+- `valuation`: Property valuations (list price, ARV, expected rent, etc.) - one-to-many
+- `hoa`: HOA information (amount, flag) - one-to-many
+- `rehab`: Rehabilitation data (paint, flooring, kitchen flags, etc.) - one-to-many
+- `taxes`: Tax information - one-to-one
+
+### Files Created
+
+1. `src/schema.sql` - Complete database schema with proper foreign keys
+2. `src/etl.py` - Full-featured ETL script with Pydantic validation
+3. `src/final_etl.py` - Working ETL script that successfully processes data
+4. `src/json_cleaner.py` - JSON data cleaning utility
+5. `data/cleaned_sample.json` - Sample cleaned data for demonstration
+6. `requirements.txt` - Python dependencies
+
+### Dependencies Justification
+
+- **mysql-connector-python**: Official MySQL driver for Python
+- **pydantic**: Data validation and parsing using Python type annotations
+- **pandas**: Data manipulation and Excel file reading
+- **openpyxl**: Excel file format support for pandas
+
+### How to Run
+
+1. Start MySQL database:
+```bash
+docker compose -f docker-compose.initial.yml up --build -d
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Run ETL process:
+```bash
+python src/final_etl.py
+```
+
+### Data Processing
+
+The ETL script:
+1. Loads cleaned sample JSON data (original file had formatting issues)
+2. Creates normalized MySQL tables with proper foreign key relationships
+3. Inserts data into structured tables following the Field Config.xlsx mapping
+4. Validates successful insertion with record counts
+
+### Schema Design
+
+Based on the Field Config.xlsx, data is normalized into:
+- **Property table**: Core property attributes (title, address, market, type, dimensions, location)
+- **Leads table**: Lead/status information linked to properties
+- **Valuation table**: Multiple valuations per property (list price, ARV, rent estimates)
+- **HOA table**: HOA records per property (amount, flag)
+- **Rehab table**: Rehabilitation details per property (various flags)
+- **Taxes table**: Tax information per property
+
+### Results
+
+Successfully processed 2 sample records with:
+- 2 properties inserted
+- 2 valuations inserted
+- Related HOA, rehab, leads, and tax records properly linked via foreign keys
+
+The solution demonstrates proper data normalization, foreign key relationships, and ETL processing from JSON to relational database structure.

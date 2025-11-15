@@ -1,0 +1,72 @@
+[
+  {
+    "Property_Title": "Sample Property 1",
+    "Address": "123 Main St, City, ST 12345",
+    "Reviewed_Status": "Active",
+    "Most_Recent_Status": "Open",
+    "Source": "Internal",
+    "Market": "Chicago",
+    "Property_Type": "SFR",
+    "SQFT_Total": 1200,
+    "Bed": 3,
+    "Bath": 2,
+    "Year_Built": 1995,
+    "Latitude": 41.8781,
+    "Longitude": -87.6298,
+    "Taxes": 5000,
+    "Valuation": [
+      {
+        "List_Price": 200000,
+        "ARV": 220000,
+        "Expected_Rent": 1800
+      }
+    ],
+    "HOA": [
+      {
+        "HOA": 100,
+        "HOA_Flag": "Yes"
+      }
+    ],
+    "Rehab": [
+      {
+        "Paint": "Yes",
+        "Flooring_Flag": "No"
+      }
+    ]
+  },
+  {
+    "Property_Title": "Sample Property 2",
+    "Address": "456 Oak Ave, City, ST 67890",
+    "Reviewed_Status": "Pending",
+    "Most_Recent_Status": "Under Review",
+    "Source": "External",
+    "Market": "Denver",
+    "Property_Type": "Condo",
+    "SQFT_Total": 900,
+    "Bed": 2,
+    "Bath": 1,
+    "Year_Built": 2005,
+    "Latitude": 39.7392,
+    "Longitude": -104.9903,
+    "Taxes": 3500,
+    "Valuation": [
+      {
+        "List_Price": 150000,
+        "Zestimate": 160000,
+        "Expected_Rent": 1400
+      }
+    ],
+    "HOA": [
+      {
+        "HOA": 200,
+        "HOA_Flag": "Yes"
+      }
+    ],
+    "Rehab": [
+      {
+        "Paint": "No",
+        "Kitchen_Flag": "Yes"
+      }
+    ]
+  }
+]
